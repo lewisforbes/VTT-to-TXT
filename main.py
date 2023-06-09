@@ -1,5 +1,6 @@
 from os import listdir, remove
 from os.path import isfile, join
+from re import sub
 
 def write_txt(fname, data):
     out_folder = "output/"
@@ -16,20 +17,7 @@ def reset_output():
     for f in listdir(out_folder):
         remove(out_folder+f)
 
-def format1(in_folder):
-    in_files = get_files(in_folder)
-    for fname in in_files:
-        f = open(in_folder+fname, "r")
-        output = ""
-        for line in f:
-            if not ("Speaker" in line and ">" in line):
-                continue
-            current = line.split(">")
-            output += current[1].replace("\n", "") + " "
-
-        write_txt(fname, output)
-
-def format2(in_folder):
+def main(in_folder):
     in_files = get_files(in_folder)
     for fname in in_files:
         f = open(in_folder+fname, "r")
@@ -38,6 +26,7 @@ def format2(in_folder):
         for line in f:
             if next:
                 next = False
+                line = sub("<[^>]*>", "", line) # remove tags
                 output += line.replace("\n", "") + " "
                 continue
             
@@ -45,8 +34,8 @@ def format2(in_folder):
                 next = True
     
         write_txt(fname, output)
+
         
 reset_output()
 in_folder = "input/"
-# format1(in_folder)
-format2(in_folder)
+main(in_folder)
