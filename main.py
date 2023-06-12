@@ -4,7 +4,7 @@ from re import sub
 
 def write_txt(fname, data):
     out_folder = "output/"
-    fname = fname.replace(".vtt", ".txt")
+    fname = fname.replace(".vtt", ".txt").replace(".srt", ".txt")
     f = open(out_folder+fname, "w")
     f.write(data)
     f.close()
