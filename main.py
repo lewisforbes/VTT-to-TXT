@@ -25,7 +25,9 @@ def main(in_folder):
         next = False
         for line in f:
             if next:
-                next = False
+                if line=="\n":
+                    next = False
+                    continue
                 line = sub("<[^>]*>", "", line) # remove tags
                 output += line.replace("\n", "") + " "
                 continue
