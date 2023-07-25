@@ -35,8 +35,10 @@ def main(in_folder):
             
             if "-->" in line:
                 next = True
-    
-        write_txt(fname, output)
+        
+        words = output.split(" ")
+        words.remove("")
+        write_txt("[{} words] {}".format(len(words), fname), output)
         print("Successfully converted file: {}".format(fname))
 
         
