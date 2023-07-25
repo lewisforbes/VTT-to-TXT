@@ -1,6 +1,7 @@
 from os import listdir, remove
 from os.path import isfile, join
 from re import sub
+from time import sleep
 
 def write_txt(fname, data):
     out_folder = "output/"
@@ -36,8 +37,13 @@ def main(in_folder):
                 next = True
     
         write_txt(fname, output)
+        print("Successfully converted file: {}".format(fname))
 
         
 reset_output()
 in_folder = "input/"
 main(in_folder)
+
+secs = 3
+print("Fininshed.\nClosing program in {} seconds.".format(secs))
+sleep(secs)
